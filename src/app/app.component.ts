@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'vaccinationDashboard';
+  routes: any[] = [
+    {
+      nome: 'Brasil',
+      path: '/'
+    },
+    {
+      nome: 'Mundo',
+      path: '/world'
+    },
+  ]
+  title = 'Dashboard de Vacinação da Covid-19';
+  activeTab = this.routes[0];
+  background = '#87eaff';
 }
