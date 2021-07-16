@@ -7,26 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./brazil.component.css']
 })
 export class BrazilComponent implements OnInit {
-  page: number = 1;
-  scrollId: string = '';
+  itemsList: any[] = [];
+
   constructor(private service: DataService) { }
 
   ngOnInit(): void {
+    this.search();
   }
 
   //mapa
   //tabela
   //gráficos, decidir quais
   search() {
-    this.service.fetchBrazilData(this.page,this.scrollId)
+    this.service.fetchBrazilData()
     .subscribe((data) => {
       console.log(data);
-      this.page = this.page +1;
+      const list = data.split('\n');
+      list.forEach(item => this.itemsList.push(item));
     })
-    // this.service.fetchGlobalData()
-    // .subscribe((data) => {
-    //   console.log(data);
-    // })
   }
 
 }

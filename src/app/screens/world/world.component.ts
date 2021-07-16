@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-world',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./world.component.css']
 })
 export class WorldComponent implements OnInit {
+  covidData: Object = {};
 
-  constructor() { }
+  //tabela inicial com todos os paises:
+  //ver de recuperar população
+  //mapa mundi
+  constructor(private service: DataService) { }
 
   ngOnInit(): void {
+    this.search();
+  }
+
+  search() {
+    this.service.fetchGlobalData()
+    .subscribe((data) => {
+      this.covidData = data;
+      console.log(data);
+    })
   }
 
 }

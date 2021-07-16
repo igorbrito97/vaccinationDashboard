@@ -9,46 +9,53 @@ export class DataService {
   login = 'imunizacao_public';
   password = 'qlto5t&7r_@+#Tlstigi';
 
-  baseUrl = 'https://covid-api.mmediagroup.fr/v1';
+  globalBaseUrl = 'https://covid-api.mmediagroup.fr/v1';
 
 
   constructor(private http: HttpClient) { }
 
-  fetchBrazilData(page: number,scrollId: string) {
-    let url: string;
+  // fetchBrazilData(page: number,scrollId: string) {
+  //   let url: string;
 
-    let httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa(`${this.login}:${this.password}`),
-      'Accept': '*/*',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true'
-    });
-    // httpHeaders = httpHeaders.append('Content-Type', 'application/json');
-    // // httpHeaders.append("Authorization", "Basic aW11bml6YWNhb19wdWJsaWM6cWx0bzV0JjdyX0ArI1Rsc3RpZ2k=");
-    // httpHeaders = httpHeaders.append("Authorization", "Basic " + btoa(`${this.login}:${this.password}`));
-    let httpParams = new HttpParams();
-    if(page == 1){
-      url = `${this.govBrUrl}?scroll=1m`;
-    }
-    else {
-      url = `${this.govBrUrl}`;
-      httpParams.append('scroll','1m');
-      httpParams.append('scroll_id',scrollId);
-    }
+  //   let httpHeaders = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Basic ' + btoa(`${this.login}:${this.password}`),
+  //     'Accept': '*/*',
+  //     'Access-Control-Allow-Origin': '*',
+  //     'Access-Control-Allow-Credentials': 'true'
+  //   });
+  //   // httpHeaders = httpHeaders.append('Content-Type', 'application/json');
+  //   // // httpHeaders.append("Authorization", "Basic aW11bml6YWNhb19wdWJsaWM6cWx0bzV0JjdyX0ArI1Rsc3RpZ2k=");
+  //   // httpHeaders = httpHeaders.append("Authorization", "Basic " + btoa(`${this.login}:${this.password}`));
+  //   let httpParams = new HttpParams();
+  //   if(page == 1){
+  //     url = `${this.govBrUrl}?scroll=1m`;
+  //   }
+  //   else {
+  //     url = `${this.govBrUrl}`;
+  //     httpParams.append('scroll','1m');
+  //     httpParams.append('scroll_id',scrollId);
+  //   }
 
-    const body = {
-      'size': 10000
-    }
+  //   const body = {
+  //     'size': 10000
+  //   }
 
 
-    return this.http.post<any>(url, body, {
-      headers: httpHeaders
-    })
+  //   return this.http.post<any>(url, body, {
+  //     headers: httpHeaders
+  //   })
+  // }
+  fetchBrazilData() {
+    return this.http.get('assets/exData.csv', { responseType: 'text' });
   }
 
-
+  //world
   fetchGlobalData() {
-    return this.http.get(`${this.baseUrl}/vaccines?country=Brazil`)
+    return this.http.get(`${this.globalBaseUrl}/vaccines`)
+  }
+
+  fetchGlobalDataByCountry(country: string){
+    return this.http.get(`${this.globalBaseUrl}/vaccines?country=${country}`);
   }
 }
