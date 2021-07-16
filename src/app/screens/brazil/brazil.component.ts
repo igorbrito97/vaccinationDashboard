@@ -23,6 +23,10 @@ export class BrazilComponent implements OnInit {
       console.log(data);
       this.page = this.page +1;
     })
+    // this.service.fetchGlobalData()
+    // .subscribe((data) => {
+    //   console.log(data);
+    // })
   }
 
 }

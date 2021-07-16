@@ -9,6 +9,8 @@ export class DataService {
   login = 'imunizacao_public';
   password = 'qlto5t&7r_@+#Tlstigi';
 
+  baseUrl = 'https://covid-api.mmediagroup.fr/v1';
+
 
   constructor(private http: HttpClient) { }
 
@@ -16,11 +18,10 @@ export class DataService {
     let url: string;
 
     let httpHeaders = new HttpHeaders({
-      // 'Content-Type': 'application/json',
-      'Content-Type': 'text/plain',
+      'Content-Type': 'application/json',
       'Authorization': 'Basic ' + btoa(`${this.login}:${this.password}`),
       'Accept': '*/*',
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': 'true'
     });
     // httpHeaders = httpHeaders.append('Content-Type', 'application/json');
@@ -44,5 +45,10 @@ export class DataService {
     return this.http.post<any>(url, body, {
       headers: httpHeaders
     })
+  }
+
+
+  fetchGlobalData() {
+    return this.http.get(`${this.baseUrl}/vaccines?country=Brazil`)
   }
 }
