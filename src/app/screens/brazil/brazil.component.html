@@ -1,3 +1,5 @@
-<div *ngFor="let item of itemsList">
+<!-- <input type="file" name="fileUpload" id="fileUpload" (change)="changeListener($event.target.files)" /> -->
+<input type="file" #csvReader name="Upload CSV" id="fileUpload" (change)="uploadListener($event)" accept=".csv" />   
+<!-- <div *ngFor="let item of itemsList">
   <p> {{item}}</p>
-</div>
+</div> -->

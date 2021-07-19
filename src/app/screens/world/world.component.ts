@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
+import { IArray } from 'src/app/_modals/data-modal';
 
 @Component({
   selector: 'app-world',
@@ -7,11 +8,14 @@ import { DataService } from 'src/app/service/data.service';
   styleUrls: ['./world.component.css']
 })
 export class WorldComponent implements OnInit {
-  covidData: Object = {};
+  covidData: IArray[] = [];
 
-  //tabela inicial com todos os paises:
-  //ver de recuperar população
-  //mapa mundi
+  
+  //histograma (?) gráfico de barra com x = data crescente qntd dias e y = quantidade -> da pra colocar um filtro por lugar com um dropdown
+  //acumulativo, gráfico de área que cresce com quantidade -> filtro tbm 
+  //mapa mundi - com cor -> clicar aparece info &&/|| colocar card  ao lado
+  //card com quantidade(s) -> somar tudo
+  //paises com maior numero de vacinados && maior porcentagem vacinados
   constructor(private service: DataService) { }
 
   ngOnInit(): void {
@@ -21,8 +25,14 @@ export class WorldComponent implements OnInit {
   search() {
     this.service.fetchGlobalData()
     .subscribe((data) => {
-      this.covidData = data;
-      console.log(data);
+      Object.entries(data).map((key) => {
+        this.covidData.push({
+          code: key[0],
+          data: key[1]
+        })        
+      })
+      console.log(this.covidData);
+      
     })
   }
 

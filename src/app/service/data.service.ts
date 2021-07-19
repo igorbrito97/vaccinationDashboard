@@ -47,12 +47,13 @@ export class DataService {
   //   })
   // }
   fetchBrazilData() {
-    return this.http.get('assets/exData.csv', { responseType: 'text' });
+    return this.http.get('home/iguinho/Documentos/brazilCovidData.csv', { responseType: 'text' });
   }
 
   //world
   fetchGlobalData() {
-    return this.http.get(`${this.globalBaseUrl}/vaccines`)
+    // return this.http.get(`${this.globalBaseUrl}/vaccines`)
+    return this.http.get('https://covid.ourworldindata.org/data/owid-covid-data.json');
   }
 
   fetchGlobalDataByCountry(country: string){
