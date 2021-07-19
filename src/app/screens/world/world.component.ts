@@ -10,12 +10,13 @@ import { IArray } from 'src/app/_modals/data-modal';
 export class WorldComponent implements OnInit {
   covidData: IArray[] = [];
 
-  
+
   //histograma (?) gráfico de barra com x = data crescente qntd dias e y = quantidade -> da pra colocar um filtro por lugar com um dropdown
-  //acumulativo, gráfico de área que cresce com quantidade -> filtro tbm 
-  //mapa mundi - com cor -> clicar aparece info &&/|| colocar card  ao lado
+  //acumulativo, gráfico de área que cresce com quantidade -> filtro tbm
+  //mapa mundi - com cor -> clicar aparece info &&/|| colocar card dia Fa ao lado
   //card com quantidade(s) -> somar tudo
   //paises com maior numero de vacinados && maior porcentagem vacinados
+  //https://ourworldindata.org/covid-vaccinations
   constructor(private service: DataService) { }
 
   ngOnInit(): void {
@@ -29,10 +30,10 @@ export class WorldComponent implements OnInit {
         this.covidData.push({
           code: key[0],
           data: key[1]
-        })        
+        })
       })
       console.log(this.covidData);
-      
+
     })
   }
 
